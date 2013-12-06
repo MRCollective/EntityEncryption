@@ -25,5 +25,22 @@ namespace EntityEncryption.Processing
                 }
             }
         }
+
+        public string Decrypt(string data, string key, string iv)
+        {
+            if (string.IsNullOrEmpty(data))
+                return data;
+
+            using (var serviceProvider = new AesCryptoServiceProvider())
+            {
+                using (var decryptor = serviceProvider.CreateDecryptor(Convert.FromBase64String(key), Convert.FromBase64String(iv)))
+                using (var m = new MemoryStream(Convert.FromBase64String(data)))
+                using (var c = new CryptoStream(m, decryptor, CryptoStreamMode.Read))
+                using (var w = new StreamReader(c))
+                {
+                    return w.ReadToEnd();
+                }
+            }
+        }
     }
 }

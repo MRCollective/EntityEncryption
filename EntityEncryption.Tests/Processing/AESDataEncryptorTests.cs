@@ -31,5 +31,23 @@ namespace EntityEncryption.Tests.Processing
 
             Assert.Equal(null, encrypted);
         }
+
+        [Fact]
+        public void Decrypt_a_string()
+        {
+            const string testData = "PnUnj5urxpZYQebUSzyC8g==";
+
+            var decrypted = _dataEncryptor.Decrypt(testData, TestKey, TestIV);
+
+            Assert.Equal("testString", decrypted);
+        }
+
+        [Fact]
+        public void Safely_decrypt_null_strings()
+        {
+            var decrypted = _dataEncryptor.Decrypt(null, TestKey, TestIV);
+
+            Assert.Equal(null, decrypted);
+        }
     }
 }
