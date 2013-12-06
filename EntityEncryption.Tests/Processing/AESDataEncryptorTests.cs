@@ -3,13 +3,13 @@ using Xunit;
 
 namespace EntityEncryption.Tests.Processing
 {
-    public class AESEncryptorTests
+    public class AESDataEncryptorTests
     {
         private const string TestKey = "e82GPy4Q333HWBGX1UOmKRKUxiaH/OViytNJxqWpWW8=";
         private const string TestIV = "Buj7srPbR73qjUTbXimNAg==";
         private readonly AESDataEncryptor _dataEncryptor;
 
-        public AESEncryptorTests()
+        public AESDataEncryptorTests()
         {
             _dataEncryptor = new AESDataEncryptor();
         }
