@@ -1,0 +1,29 @@
+﻿<?xml version='1.0' encoding='UTF-8'?> 
+<package>
+  <metadata>
+    <id>
+       EntityEncryption
+    </id>
+    <version>
+       0.1.0.0
+    </version>
+    <authors>
+       Matthew Davies
+    </authors>
+    <description>
+      Shared library to transparently handle the encryption for properties on data entities, used by ORM specific implementations.
+    </description>
+    <projectUrl>
+      https://github.com/MRCollective/EntityEncryption
+    </projectUrl>
+    <licenseUrl>
+      https://github.com/MRCollective/EntityEncryption/blob/master/LICENSE
+    </licenseUrl>
+    <language>
+       en-US
+    </language>
+  </metadata>
+  <files>
+     <file src="EntityEncryption\bin\Release\EntityEncryption.dll" target="lib\NET40" />
+  </files>
+</package>
