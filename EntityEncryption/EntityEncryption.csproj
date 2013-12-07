@@ -42,6 +42,7 @@
     <Compile Include="Attributes\EncryptAttribute.cs" />
     <Compile Include="Entities\IEncryptableEntity.cs" />
     <Compile Include="Processing\AESDataEncryptor.cs" />
+    <Compile Include="Processing\BaseDataEncryptor.cs" />
     <Compile Include="Processing\IDataEncryptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

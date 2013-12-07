@@ -4,10 +4,12 @@ using System.Security.Cryptography;
 
 namespace EntityEncryption.Processing
 {
-    public class AESDataEncryptor : IDataEncryptor
+    public class AESDataEncryptor : BaseDataEncryptor, IDataEncryptor
     {
-        public string Encrypt(string data, string key, string iv)
+        public override string Encrypt(string data, string key, string iv)
         {
+            if (string.IsNullOrEmpty(iv))
+                throw new ArgumentNullException("iv", "You must specify an IV for entity encryption.");
             if (string.IsNullOrEmpty(data))
                 return data;
 
@@ -26,9 +28,9 @@ namespace EntityEncryption.Processing
             }
         }
 
-        public string Decrypt(string data, string key, string iv)
+        public override string Decrypt(string data, string key, string iv)
         {
-            if (string.IsNullOrEmpty(data))
+            if (string.IsNullOrEmpty(data) || string.IsNullOrEmpty(iv))
                 return data;
 
             byte[] encrypted;

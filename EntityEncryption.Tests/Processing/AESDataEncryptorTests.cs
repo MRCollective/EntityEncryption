@@ -1,5 +1,8 @@
-﻿using EntityEncryption.Processing;
+﻿using System;
+using EntityEncryption.Processing;
+using EntityEncryption.Tests.Entities;
 using Xunit;
+using Xunit.Extensions;
 
 namespace EntityEncryption.Tests.Processing
 {
@@ -32,6 +35,29 @@ namespace EntityEncryption.Tests.Processing
             Assert.Equal(null, encrypted);
         }
 
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void Throw_exception_if_attempting_to_encrypt_with_null_iv(string iv)
+        {
+            Assert.Throws<ArgumentNullException>(() => _dataEncryptor.Encrypt("Test", TestKey, iv));
+        }
+
+        [Fact]
+        public void Apply_encryption_to_marked_properties()
+        {
+            var entity = new TestEntity
+            {
+                EncryptedData = "Test1",
+                UnencryptedData = "Test2"
+            };
+
+            _dataEncryptor.EncryptProperties(entity, TestKey, TestIV);
+
+            Assert.Equal("oqodVQZ34BVVvsOLVeMQBQ==", entity.EncryptedData);
+            Assert.Equal("Test2", entity.UnencryptedData);
+        }
+
         [Fact]
         public void Return_same_string_on_decryption_if_not_base64()
         {
@@ -58,6 +84,37 @@ namespace EntityEncryption.Tests.Processing
             var decrypted = _dataEncryptor.Decrypt(null, TestKey, TestIV);
 
             Assert.Equal(null, decrypted);
+        }
+
+        [Fact]
+        public void Apply_decryption_to_marked_properties()
+        {
+            var entity = new TestEntity
+            {
+                EncryptedData = "oqodVQZ34BVVvsOLVeMQBQ==",
+                UnencryptedData = "Test2",
+                Iv = TestIV
+            };
+
+            _dataEncryptor.DecryptProperties(entity, TestKey);
+
+            Assert.Equal("Test1", entity.EncryptedData);
+            Assert.Equal("Test2", entity.UnencryptedData);
+        }
+
+        [Fact]
+        public void Avoid_decryption_if_no_iv_present()
+        {
+            var entity = new TestEntity
+            {
+                EncryptedData = "oqodVQZ34BVVvsOLVeMQBQ==",
+                UnencryptedData = "Test2"
+            };
+
+            _dataEncryptor.DecryptProperties(entity, TestKey);
+
+            Assert.Equal("oqodVQZ34BVVvsOLVeMQBQ==", entity.EncryptedData);
+            Assert.Equal("Test2", entity.UnencryptedData);
         }
     }
 }
