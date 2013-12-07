@@ -31,10 +31,20 @@ namespace EntityEncryption.Processing
             if (string.IsNullOrEmpty(data))
                 return data;
 
+            byte[] encrypted;
+            try
+            {
+                encrypted = Convert.FromBase64String(data);
+            }
+            catch (FormatException)
+            {
+                return data;
+            }
+            
             using (var serviceProvider = new AesCryptoServiceProvider())
             {
                 using (var decryptor = serviceProvider.CreateDecryptor(Convert.FromBase64String(key), Convert.FromBase64String(iv)))
-                using (var m = new MemoryStream(Convert.FromBase64String(data)))
+                using (var m = new MemoryStream(encrypted))
                 using (var c = new CryptoStream(m, decryptor, CryptoStreamMode.Read))
                 using (var w = new StreamReader(c))
                 {

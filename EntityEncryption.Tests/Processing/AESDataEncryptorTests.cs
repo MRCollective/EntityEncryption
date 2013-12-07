@@ -33,6 +33,16 @@ namespace EntityEncryption.Tests.Processing
         }
 
         [Fact]
+        public void Return_same_string_on_decryption_if_not_base64()
+        {
+            const string testData = "54654ghhfhf";
+
+            var decrypted = _dataEncryptor.Decrypt(testData, TestKey, TestIV);
+
+            Assert.Equal(testData, decrypted);
+        }
+
+        [Fact]
         public void Decrypt_a_string()
         {
             const string testData = "PnUnj5urxpZYQebUSzyC8g==";
