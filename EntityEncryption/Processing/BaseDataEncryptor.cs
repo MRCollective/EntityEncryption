@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
 using EntityEncryption.Attributes;
 using EntityEncryption.Entities;
-using Microsoft.SqlServer.Server;
 
 namespace EntityEncryption.Processing
 {
@@ -14,7 +12,7 @@ namespace EntityEncryption.Processing
 
         public void EncryptProperties(IEncryptableEntity entity, string key, string iv)
         {
-            ReplacePropertyState(entity, s => Encrypt(s, key, iv));
+            ReplacePropertyState(entity, s => Encrypt(s, key, entity.Iv ?? iv));
         }
 
         public void DecryptProperties(IEncryptableEntity entity, string key)

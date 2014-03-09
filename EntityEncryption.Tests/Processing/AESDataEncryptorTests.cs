@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using EntityEncryption.Processing;
 using EntityEncryption.Tests.Entities;
 using Xunit;
@@ -56,6 +57,20 @@ namespace EntityEncryption.Tests.Processing
 
             Assert.Equal("oqodVQZ34BVVvsOLVeMQBQ==", entity.EncryptedData);
             Assert.Equal("Test2", entity.UnencryptedData);
+        }
+
+        [Fact]
+        public void Reuse_encryption_iv_if_present()
+        {
+            var entity = new TestEntity
+            {
+                EncryptedData = "Test1",
+                Iv = "wp5EddOfzr/w9vtQz7mcEg=="
+            };
+
+            _dataEncryptor.EncryptProperties(entity, TestKey, TestIV);
+
+            Assert.Equal("6zreAe6YS/JMbI1zw7NF5g==", entity.EncryptedData);
         }
 
         [Fact]
