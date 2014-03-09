@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>
-       EntityEncryption
+       EntityEncryption.NHibernate
     </id>
     <version>
        0.1.0.0
@@ -11,7 +11,7 @@
        Matthew Davies
     </authors>
     <description>
-      Shared library to transparently handle the encryption for properties on data entities, used by ORM specific implementations.
+      Shared library to transparently handle the encryption for properties on data entities managed with NHibernate.
     </description>
     <projectUrl>
       https://github.com/MRCollective/EntityEncryption
@@ -24,6 +24,7 @@
     </language>
   </metadata>
   <files>
-     <file src="EntityEncryption\bin\Release\EntityEncryption.dll" target="lib\NET40" />
+     <file src="bin\Release\EntityEncryption.Base.dll" target="lib\NET40" />
+     <file src="bin\Release\EntityEncryption.NHibernate.dll" target="lib\NET40" />
   </files>
 </package>
