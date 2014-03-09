@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Security.Cryptography;
-using EntityEncryption.Processing;
+using EntityEncryption.Encryptors;
+using EntityEncryption.IVGenerators;
 using EntityEncryption.Tests.Entities;
+using NSubstitute;
 using Xunit;
 using Xunit.Extensions;
 
-namespace EntityEncryption.Tests.Processing
+namespace EntityEncryption.Tests.Encryptors
 {
     public class AESDataEncryptorTests
     {
@@ -15,7 +16,10 @@ namespace EntityEncryption.Tests.Processing
 
         public AESDataEncryptorTests()
         {
-            _dataEncryptor = new AESDataEncryptor();
+            var ivGenerator = Substitute.For<IIVGenerator>();
+            ivGenerator.NewIV().Returns(TestIV);
+
+            _dataEncryptor = new AESDataEncryptor(ivGenerator);
         }
 
         [Fact]
@@ -53,7 +57,7 @@ namespace EntityEncryption.Tests.Processing
                 UnencryptedData = "Test2"
             };
 
-            _dataEncryptor.EncryptProperties(entity, TestKey, TestIV);
+            _dataEncryptor.EncryptProperties(entity, TestKey);
 
             Assert.Equal("oqodVQZ34BVVvsOLVeMQBQ==", entity.EncryptedData);
             Assert.Equal("Test2", entity.UnencryptedData);
@@ -68,7 +72,7 @@ namespace EntityEncryption.Tests.Processing
                 Iv = "wp5EddOfzr/w9vtQz7mcEg=="
             };
 
-            _dataEncryptor.EncryptProperties(entity, TestKey, TestIV);
+            _dataEncryptor.EncryptProperties(entity, TestKey);
 
             Assert.Equal("6zreAe6YS/JMbI1zw7NF5g==", entity.EncryptedData);
         }

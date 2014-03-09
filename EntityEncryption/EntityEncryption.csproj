@@ -41,9 +41,11 @@
   <ItemGroup>
     <Compile Include="Attributes\EncryptAttribute.cs" />
     <Compile Include="Entities\IEncryptableEntity.cs" />
-    <Compile Include="Processing\AESDataEncryptor.cs" />
-    <Compile Include="Processing\BaseDataEncryptor.cs" />
-    <Compile Include="Processing\IDataEncryptor.cs" />
+    <Compile Include="Encryptors\AESDataEncryptor.cs" />
+    <Compile Include="Encryptors\BaseDataEncryptor.cs" />
+    <Compile Include="Encryptors\IDataEncryptor.cs" />
+    <Compile Include="IVGenerators\AESIVGenerator.cs" />
+    <Compile Include="IVGenerators\IIVGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

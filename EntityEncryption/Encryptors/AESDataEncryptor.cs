@@ -1,11 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Security.Cryptography;
+using EntityEncryption.IVGenerators;
 
-namespace EntityEncryption.Processing
+namespace EntityEncryption.Encryptors
 {
     public class AESDataEncryptor : BaseDataEncryptor, IDataEncryptor
     {
+        private readonly IIVGenerator _ivGenerator;
+
+        public AESDataEncryptor(IIVGenerator ivGenerator) : base(ivGenerator)
+        {
+            _ivGenerator = ivGenerator;
+        }
+
         public override string Encrypt(string data, string key, string iv)
         {
             if (string.IsNullOrEmpty(iv))

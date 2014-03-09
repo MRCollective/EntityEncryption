@@ -2,17 +2,25 @@
 using System.Reflection;
 using EntityEncryption.Attributes;
 using EntityEncryption.Entities;
+using EntityEncryption.IVGenerators;
 
-namespace EntityEncryption.Processing
+namespace EntityEncryption.Encryptors
 {
     public abstract class BaseDataEncryptor
     {
         public abstract string Encrypt(string data, string key, string iv);
         public abstract string Decrypt(string data, string key, string iv);
+        
+        private readonly IIVGenerator _ivGenerator;
 
-        public void EncryptProperties(IEncryptableEntity entity, string key, string iv)
+        protected BaseDataEncryptor(IIVGenerator ivGenerator)
         {
-            ReplacePropertyState(entity, s => Encrypt(s, key, entity.Iv ?? iv));
+            _ivGenerator = ivGenerator;
+        }
+
+        public void EncryptProperties(IEncryptableEntity entity, string key)
+        {
+            ReplacePropertyState(entity, s => Encrypt(s, key, entity.Iv ?? _ivGenerator.NewIV()));
         }
 
         public void DecryptProperties(IEncryptableEntity entity, string key)
