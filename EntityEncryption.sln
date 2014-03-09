@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption", "EntityEncryption\EntityEncryption.csproj", "{1438060A-3833-44E4-AE61-1D2DDB86E6BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption.Base", "EntityEncryption.Base\EntityEncryption.Base.csproj", "{1438060A-3833-44E4-AE61-1D2DDB86E6BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption.Tests", "EntityEncryption.Tests\EntityEncryption.Tests.csproj", "{2CA40CB9-29BC-4B69-89D1-7947CB493832}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption.Base.Tests", "EntityEncryption.Base.Tests\EntityEncryption.Base.Tests.csproj", "{2CA40CB9-29BC-4B69-89D1-7947CB493832}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9D2D4DCA-085D-4117-BCAB-023B7C146A79}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9D2D4D
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption.NHibernate", "EntityEncryption.NHibernate\EntityEncryption.NHibernate.csproj", "{E090FEE9-3523-402D-99C0-42A4BA910CE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityEncryption.NHibernate.Tests", "EntityEncryption.NHibernate.Tests\EntityEncryption.NHibernate.Tests.csproj", "{342E0588-F322-43D0-940E-B202644D4471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +32,14 @@ Global
 		{2CA40CB9-29BC-4B69-89D1-7947CB493832}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CA40CB9-29BC-4B69-89D1-7947CB493832}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CA40CB9-29BC-4B69-89D1-7947CB493832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E090FEE9-3523-402D-99C0-42A4BA910CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E090FEE9-3523-402D-99C0-42A4BA910CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E090FEE9-3523-402D-99C0-42A4BA910CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E090FEE9-3523-402D-99C0-42A4BA910CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342E0588-F322-43D0-940E-B202644D4471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342E0588-F322-43D0-940E-B202644D4471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342E0588-F322-43D0-940E-B202644D4471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342E0588-F322-43D0-940E-B202644D4471}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
